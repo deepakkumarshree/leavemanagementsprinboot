@@ -1,0 +1,76 @@
+package com.lms.daoImp;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.lms.dao.MasterDao;
+import com.lms.model.Employee;
+import com.lms.model.LeaveType;
+import com.lms.model.Role;
+@SuppressWarnings("unchecked")
+@Repository
+public class MasterDaoImp implements MasterDao{
+	@Autowired
+	private SessionFactory sessionFactory;
+
+	
+	@Override
+	@Transactional
+	public List getRoles() {
+		 List<?> roleList=sessionFactory.getCurrentSession().createCriteria(Role.class).list();
+		// List filnalRole=new ArrayList<Map>();
+		
+		 Map<Integer,String> roleMap=new HashMap<Integer,String>();
+		 for(Object obj:roleList)
+		 {
+			 Role role=(Role)obj;
+			
+			 roleMap.put(role.getRoleId(), role.getRoleName());
+			// filnalRole.add(roleMap);
+		 }
+		 
+		
+		 return roleList;
+		 
+		 
+		
+	}
+	@Override
+	@Transactional
+	public Map getManagers() {
+		 List managerList= sessionFactory.getCurrentSession().createCriteria(Employee.class)
+				 .add(Restrictions.eq("role.roleId",2)).list();
+		 Map managerMap=new HashMap<String,String>();
+		 for(Object obj:managerList)
+		 {
+			 Employee emp=(Employee)obj;
+			
+			 managerMap.put(emp.getEmpcode(), emp.getFirstname()+" "+(emp.getLastname()!=null?emp.getLastname():""));
+			// filnalRole.add(roleMap);
+		 }
+		 return managerMap;
+		
+	}
+	@Override
+	@Transactional
+	public Map<Integer,String> getLeaveType() {
+		 List<LeaveType> leaveTypeList= sessionFactory.getCurrentSession().createCriteria(LeaveType.class).list();
+		 Map<Integer,String> leaveTypeMap=new HashMap<Integer,String>();
+		 for(Object obj:leaveTypeList)
+		 {
+			 LeaveType lType=(LeaveType)obj;			
+			 leaveTypeMap.put(lType.getLeaveTypeId(), lType.getLeaveTypeName());			
+		 }
+		 return leaveTypeMap;
+		
+	}
+}

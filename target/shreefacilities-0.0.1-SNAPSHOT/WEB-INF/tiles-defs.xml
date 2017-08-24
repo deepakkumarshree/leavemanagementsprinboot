@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	
+
+	<definition name="baseLayout" template="/view/layout/Layout.jsp">
+			<put-attribute name="title" value="Shree Partners Facilities" />
+			<put-attribute name="header" value="/view/layout/Header.jsp" />
+			<put-attribute name="menu" value="/view/layout/Menu.jsp" />
+			<put-attribute name="body" value="" />
+	</definition>
+	
+	
+		
+		<definition name="innerLayout" template="/jsp/layout/InnerLayout.jsp">
+			<put-attribute name="title" value="Shree Partners Facilities" />
+			<put-attribute name="body" value="" />
+		</definition>
+			<definition name="login" template="/view/LoginPage.jsp">
+			</definition>
+			
+			<definition name="home" extends="baseLayout">
+				<put-attribute name="title" value="Home Page" />
+				<put-attribute name="body" value="/view/HomePage.jsp" />
+			</definition>
+			
+			<definition name="mytime" extends="baseLayout">
+				<put-attribute name="title" value="My Time" />
+				<put-attribute name="body" value="/view/MyTime.jsp" />
+			</definition>
+			
+			<definition name="myrecruitment" extends="baseLayout">
+				<put-attribute name="title" value="My Recruitment" />
+				<put-attribute name="body" value="/view/MyRecruitment.jsp" />
+			</definition>
+			
+			<definition name="changepassword" extends="baseLayout">
+				<put-attribute name="title" value="Change Password" />
+				<put-attribute name="body" value="/view/ChangePassword.jsp" />
+			</definition>
+			<definition name="leavetype" template="/view/master/LeaveType.jsp">				
+			</definition>
+			
+			<definition name="addemp" template="/view/master/CreateEmployee.jsp">				
+			</definition>
+			<definition name="allemp" template="/view/master/EmpList.jsp">				
+			</definition>
+			
+			
+			
+			
+	      </tiles-definitions>
+
